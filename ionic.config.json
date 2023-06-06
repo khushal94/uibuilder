@@ -1,0 +1,7 @@
+{
+  "name": "uibuilder",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

@@ -25,3 +25,24 @@
 #container a {
   text-decoration: none;
 }
+
+ion-content {
+  --background: #f1f1f1;
+}
+
+.textbox-style {
+  border-bottom: 1px solid #000;
+}
+
+.label-style {
+  color: #9d9d9d;
+  font-weight: 600;
+}
+
+.text-center{
+  text-align: center;
+}
+
+.top-margin-min{
+  margin-top:25px
+}

@@ -1,20 +1,38 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Ui Builder
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <div *ngFor="let pageContent of formJsonData">
+    <ion-grid *ngIf="pageContent.pageid === currentPageId" class="top-margin-min">
+      <form #uiBuilder="ngForm">
+        <div class="" *ngFor="let formElements of pageContent.controls">
+          <ion-item *ngIf="formElements.type !== 'button' ">
+            <ion-label *ngIf="formElements.type === 'label' " ngClass="label-style">{{formElements.text}} : </ion-label>
+            <ion-input *ngIf="formElements.type === 'textbox' " [type]="formElements.validation ?? 'text' "
+              name="{{formElements.id}}" [(ngModel)]="formElements.value" ngClass="textbox-style" required></ion-input>
+            <ion-checkbox labelPlacement="start"
+              *ngIf="formElements.type === 'checkbox' ">{{formElements.text}}</ion-checkbox>
+
+          </ion-item>
+          <ion-button block expand="full" style="margin-top: 25px"
+            *ngIf="formElements.type === 'button' && formElements.text === 'Submit' || formElements.text === 'Next' " (click)="btnEvents(formElements)"
+            [disabled]="!uiBuilder.valid ">{{formElements.text}}</ion-button>
+            <ion-button  ion-button type="submit" block expand="full" style="margin-top: 25px"
+            *ngIf="formElements.type === 'button' && formElements.text !== 'Submit' && formElements.text !== 'Next' " (click)="btnEvents(formElements)"
+            >{{formElements.text}}</ion-button>
+        </div>
+      </form>
+    </ion-grid>
   </div>
+
+  <div *ngIf="showMsg">
+    <p class="text-center"> {{showMsg}} </p>
+  </div>
+
 </ion-content>
